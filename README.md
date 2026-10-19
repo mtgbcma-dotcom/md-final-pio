@@ -8,6 +8,17 @@ Desenvolvi uma rede social inspirada no funcionamento do Twitter, com identidade
 
 [Visualizar a interface móvel no modo escuro](docs/images/feed-mobile-dark.jpg)
 
+## Aplicação online
+
+Acesse: https://brunom.pythonanywhere.com/
+
+Para experimentar, crie uma conta, abra Explorar e siga os
+perfis demonstrativos. O feed Início exibirá as publicações
+das pessoas seguidas.
+
+É possível publicar, editar e excluir suas publicações,
+curtir, comentar, salvar posts e personalizar o perfil.
+
 ## Funcionalidades
 
 | Requisito | Implementação |

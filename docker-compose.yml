@@ -1,0 +1,25 @@
+name: md-final-pio
+services:
+  web:
+    build: .
+    image: md-final-pio:latest
+    ports:
+      - "127.0.0.1:${APP_PORT:-8005}:8000"
+    environment:
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-1}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-django-insecure-pio-local-development-only}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,[::1]}
+      SQLITE_DB_PATH: /data/db.sqlite3
+      MEDIA_ROOT: /media
+    volumes:
+      - pio_data:/data
+      - pio_media:/media
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/auth/csrf/', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+      retries: 6
+volumes:
+  pio_data:
+  pio_media:

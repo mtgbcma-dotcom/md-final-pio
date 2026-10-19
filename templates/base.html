@@ -1,0 +1,18 @@
+{% load static %}<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#087568"><meta name="description" content="Pio: um espaço para compartilhar ideias, seguir pessoas e fazer boas conversas acontecerem.">
+  <title>{% block title %}Pio · Boas conversas começam aqui{% endblock %}</title>
+  <link rel="icon" href="{% static 'img/mark.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="{% static 'js/theme.js' %}"></script>
+  {% block scripts %}{% endblock %}
+</head>
+<body>
+  {% include 'icons.html' %}
+  <a href="#main" class="skip">Pular para o conteúdo</a>
+  {% block content %}{% endblock %}
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

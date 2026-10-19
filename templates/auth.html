@@ -1,0 +1,36 @@
+{% extends 'base.html' %}{% load static %}
+{% block scripts %}<script src="{% static 'js/auth.js' %}" type="module"></script>{% endblock %}
+{% block content %}
+<div class="auth-layout">
+  <section class="auth-story">
+    <a class="brand" href="/entrar/" aria-label="Pio, página inicial"><img src="{% static 'img/mark.svg' %}" alt="" width="38" height="38">pio<span class="brand-dot">.</span></a>
+    <div class="story-content"><span class="eyebrow">MENOS RUÍDO. MAIS CONEXÃO.</span>
+      <h1>Pequenas ideias.<br>Grandes<br><em>conversas.</em></h1>
+      <p>Um lugar para compartilhar o que move você.<br>Encontre sua turma e faça parte da conversa.</p>
+      <div class="story-note"><svg class="icon"><use href="#i-feather"/></svg><div><strong>Seu próximo pio pode ser o começo.</strong><span>280 caracteres. Infinitas possibilidades.</span></div></div>
+    </div>
+    <footer>FEITO PARA PESSOAS, IDEIAS E NOVAS PERSPECTIVAS.</footer>
+    <span class="story-orbit orbit-one" aria-hidden="true"></span><span class="story-orbit orbit-two" aria-hidden="true"></span>
+  </section>
+  <main id="main" class="auth-panel">
+    <button class="icon-button theme-toggle auth-theme" aria-label="Alternar modo escuro"><svg class="icon"><use href="#i-moon"/></svg></button>
+    <div class="auth-card">
+      <span class="pill">Sua conversa começa aqui</span>
+      <h2>{% if register %}Encontre a sua turma.{% else %}Bom ter você de volta.{% endif %}</h2>
+      <p class="muted">{% if register %}Crie sua conta e compartilhe seu primeiro pio.{% else %}Entre para descobrir o que sua rede está compartilhando.{% endif %}</p>
+      <form id="auth-form" data-mode="{% if register %}register{% else %}login{% endif %}">
+        {% csrf_token %}
+        {% if register %}<label>Seu nome<input name="name" maxlength="80" autocomplete="name" required placeholder="Como você quer ser chamado?"></label>{% endif %}
+        <label>Nome de usuário<div class="input-prefix"><span>@</span><input name="username" autocomplete="username" {% if register %}pattern="[A-Za-z0-9_]{3,20}" minlength="3" maxlength="20"{% endif %} required placeholder="seu_usuario" autocapitalize="none" spellcheck="false"></div></label>
+        {% if register %}<label>E-mail<input name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com"></label>{% endif %}
+        <label>Senha<input name="password" type="password" autocomplete="{% if register %}new-password{% else %}current-password{% endif %}" {% if register %}minlength="10"{% endif %} required placeholder="{% if register %}Pelo menos 10 caracteres{% else %}Sua senha{% endif %}"></label>
+        {% if register %}<label>Confirme a senha<input name="password_confirm" type="password" autocomplete="new-password" minlength="10" required placeholder="Digite a senha novamente"></label><p class="field-hint">Combine letras e números. Evite seu nome e senhas comuns.</p>{% endif %}
+        <div id="form-error" class="form-error" role="alert" hidden></div>
+        <button type="submit" class="button primary wide">{% if register %}Criar minha conta{% else %}Entrar no Pio{% endif %}<span aria-hidden="true">↗</span></button>
+      </form>
+      <p class="auth-switch">{% if register %}Já faz parte? <a href="/entrar/">Entrar na minha conta</a>{% else %}Ainda não tem conta? <a href="/cadastro/">Criar uma conta</a>{% endif %}</p>
+      <div class="auth-bottom"><span class="tiny-dot"></span>Um espaço para conexões de verdade.</div>
+    </div>
+  </main>
+</div>
+{% endblock %}

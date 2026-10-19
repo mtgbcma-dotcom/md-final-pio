@@ -1,0 +1,34 @@
+{% extends 'base.html' %}{% load static %}
+{% block scripts %}<script src="{% static 'js/app.js' %}" type="module"></script>{% endblock %}
+{% block content %}
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="/" data-nav aria-label="Pio, início"><img src="{% static 'img/mark.svg' %}" alt="" width="38" height="38">pio<span class="brand-dot">.</span></a>
+    <nav class="main-nav" aria-label="Menu principal">
+      <a href="/" data-nav data-section="home" aria-label="Início"><svg class="icon"><use href="#i-home"/></svg><span>Início</span></a>
+      <a href="/explorar/" data-nav data-section="explore" aria-label="Explorar"><svg class="icon"><use href="#i-search"/></svg><span>Explorar</span></a>
+      <a href="/salvos/" data-nav data-section="saved" aria-label="Salvos"><svg class="icon"><use href="#i-bookmark"/></svg><span>Salvos</span></a>
+      <a id="my-profile-link" href="#" data-nav data-section="profile" aria-label="Meu perfil"><svg class="icon"><use href="#i-user"/></svg><span>Meu perfil</span></a>
+      <a href="/configuracoes/" data-nav data-section="settings" aria-label="Configurações"><svg class="icon"><use href="#i-settings"/></svg><span>Configurações</span></a>
+    </nav>
+    <button class="button primary compose-trigger"><svg class="icon"><use href="#i-feather"/></svg><span>Escrever um pio</span></button>
+    <div class="sidebar-bottom">
+      <button class="text-button theme-toggle"><svg class="icon"><use href="#i-moon"/></svg><span>Alternar tema</span></button>
+      <div class="sidebar-user" id="sidebar-user"></div>
+      <button class="text-button" id="logout"><svg class="icon"><use href="#i-out"/></svg><span>Sair da conta</span></button>
+      <p class="sidebar-credit">Pio © {% now 'Y' %}<br>Projeto final · Bruno C. M. de Almeida</p>
+    </div>
+  </aside>
+  <main id="main" class="timeline" tabindex="-1">
+    <header class="timeline-header"><div><span class="eyebrow" id="page-kicker">SUAS CONEXÕES, SUAS CONVERSAS</span><h1 id="page-title">Início</h1></div><span class="live-badge"><span class="tiny-dot"></span>Seu cantinho na rede</span></header>
+    <div id="page-content" aria-busy="true"><div class="loading">Preparando suas conversas…</div></div>
+  </main>
+  <aside class="discovery">
+    <form id="global-search" class="search-box" role="search"><button class="icon-button" type="submit" aria-label="Buscar"><svg class="icon"><use href="#i-search"/></svg></button><input name="q" aria-label="Buscar pessoas e publicações" placeholder="Buscar no Pio" maxlength="80"></form>
+    <section class="discovery-card"><div class="section-heading"><div><span class="eyebrow">NOVAS CONEXÕES</span><h2>Gente para conhecer</h2></div><span aria-hidden="true">✦</span></div><div id="suggestions"></div><a href="/explorar/" data-nav class="subtle-link">Explorar mais pessoas <span aria-hidden="true">↗</span></a></section>
+    <section class="manifesto"><span class="eyebrow">UM PIO DE CADA VEZ</span><h2>Uma boa conversa<br>muda o seu dia.</h2><p>Compartilhe ideias. Escute outras perspectivas. Cultive suas conexões.</p><svg class="icon"><use href="#i-feather"/></svg></section>
+    <footer class="discovery-footer">Feito com Python, Django e boas ideias.<br>Projeto acadêmico · Rede social de microblog.</footer>
+  </aside>
+</div>
+<dialog id="dialog" class="dialog"><div class="dialog-top"><h2 id="dialog-title"></h2><button class="icon-button" id="close-dialog" aria-label="Fechar janela"><svg class="icon"><use href="#i-close"/></svg></button></div><div id="dialog-content"></div></dialog>
+{% endblock %}
